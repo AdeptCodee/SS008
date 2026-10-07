@@ -1,34 +1,23 @@
-# Korea 2022 — Interactive Policy Story
+# Korea Policy Story v2
 
-## Chạy project
+Interactive React/Vite microsite về quyết định đặc xá Hàn Quốc tháng 8/2022.
 
+## Điểm chính
+- Samsung Blue / political-editorial visual language
+- Scroll reveal + hover/tap interactions
+- Tách trang theo từng chủ đề thay vì nhồi toàn bộ nội dung vào homepage
+- Interactive 2D balance illustration (SVG) cho phần Trade-off
+- Flipbook portal: sửa `src/config.js` để gắn URL ngoài
+- Game hub: sửa `src/config.js` để gắn game bên ngoài hoặc route riêng
+- Trang Sources riêng
+
+## Chạy local
 ```bash
 npm install
 npm run dev
 ```
 
-## Build production
-
+## Build
 ```bash
 npm run build
 ```
-
-## Hai link cần thay
-
-Mở `src/config.js`:
-
-```js
-export const FLIPBOOK_URL = 'https://example.com/your-flipbook'
-export const GAME_URL = '/game/'
-```
-
-- `FLIPBOOK_URL`: link Flipbook bên ngoài.
-- `GAME_URL`: URL/route game thật sau này.
-
-## Nội dung
-
-Website được rút gọn có chủ đích từ file PDF nội dung chủ đề SS008. Trang chủ chỉ đóng vai trò story map; nội dung dài được chia thành các route riêng: Event, Context, Chaebol, Government, Debate, Myth, Trade-off, Conclusion và Sources.
-
-## 3D
-
-Chiếc cân sử dụng React Three Fiber + Three.js, không phải CSS giả 3D. Component: `src/components/Balance3D.jsx`.

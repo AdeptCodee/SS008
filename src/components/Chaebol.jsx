@@ -1,5 +1,0 @@
-import React,{useState} from 'react';
-import {motion} from 'framer-motion';
-import {chaebols} from '../data';
-import './Chaebol.css';
-export default function Chaebol(){const [i,setI]=useState(0);return <section className="section chaebol-sec" id="chaebol"><div className="section-head"><div><div className="eyebrow">03 / POWER MAP</div><h2>CHAEBOL<br/><span>TRỤC QUYỀN LỰC</span></h2></div><p className="section-copy">Một giao diện kiểu “persona selector”: bấm vào từng tập đoàn để thay đổi toàn bộ trung tâm câu chuyện.</p></div><div className="power-stage"><div className="power-orbit orbit-1"/><div className="power-orbit orbit-2"/><div className="power-core"><motion.div key={i} initial={{scale:.7,opacity:0,rotate:-8}} animate={{scale:1,opacity:1,rotate:0}} transition={{duration:.6,type:'spring'}}><span>FOCUS</span><b>{chaebols[i].name}</b><small>{chaebols[i].tag}</small><p>{chaebols[i].body}</p></motion.div></div><div className="power-nodes">{chaebols.map((c,n)=><button key={c.name} className={n===i?'active':''} onClick={()=>setI(n)} style={{['--a']: `${n*90-45}deg`}}><span>{c.name}</span></button>)}</div></div></section>}

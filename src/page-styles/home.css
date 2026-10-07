@@ -344,3 +344,136 @@
     height: 185vh;
   }
 }
+
+.page-footer-nav {
+  padding: 70px 0 90px;
+  background: #f2f6fb;
+  border-top: 1px solid var(--line);
+}
+
+.page-footer-nav-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+/* =========================================================
+   CHUNG
+   ========================================================= */
+
+.page-footer-back,
+.page-footer-top,
+.page-footer-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  padding: 13px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #0a1333;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+}
+
+/* =========================================================
+   VỀ TRANG TỔNG QUAN - TRÁI
+   ========================================================= */
+
+.page-footer-back {
+  justify-self: start;
+}
+
+.page-footer-back svg {
+  color: var(--blue);
+}
+
+.page-footer-back:hover {
+  transform: translateY(-3px);
+  border-color: #a9b7ef;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+}
+
+/* =========================================================
+   VỀ ĐẦU TRANG - GIỮA
+   ========================================================= */
+
+.page-footer-top {
+  justify-self: center;
+}
+
+.page-footer-top svg {
+  color: var(--blue);
+}
+
+.page-footer-top:hover {
+  transform: translateY(-3px);
+  border-color: #a9b7ef;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+}
+
+/* =========================================================
+   TRANG TIẾP THEO - PHẢI
+   ========================================================= */
+
+.page-footer-next {
+  justify-self: end;
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.page-footer-next svg {
+  color: #fff;
+}
+
+.page-footer-next:hover {
+  transform: translateY(-3px);
+  background: #2748db;
+  border-color: #2748db;
+  box-shadow: 0 12px 28px rgba(39, 72, 219, 0.2);
+}
+
+/* Giữ cột phải khi trang cuối không có nextPath */
+.page-footer-next-placeholder {
+  justify-self: end;
+  width: 1px;
+  height: 1px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+  .page-footer-nav {
+    padding: 50px 0 65px;
+  }
+
+  .page-footer-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .page-footer-back,
+  .page-footer-top,
+  .page-footer-next {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .page-footer-next-placeholder {
+    display: none;
+  }
+}

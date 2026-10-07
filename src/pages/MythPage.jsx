@@ -11,9 +11,9 @@ export default function MythPage(){
  return <>
  <PageIntro number="06 / MYTH VS FACT" title="Điều gì dễ bị hiểu sai?" subtitle="Bấm vào từng thẻ để lật mặt sau. Trang chính chỉ cho bạn những câu hỏi đáng chú ý; câu trả lời xuất hiện sau tương tác."/>
  <section className="section"><div className="container grid grid-2">{myths.map((m,i)=><Reveal key={m.myth} delay={i*.04}><button className="flip-card" onClick={()=>setOpen(open===i?null:i)}><motion.div className="flip-inner" animate={{rotateY:open===i?180:0}} transition={{duration:.55}}><div className="flip-face front"><span>MYTH {i+1}</span><h3>{m.myth}</h3><small><RotateCcw size={14}/> bấm để lật</small></div><div className="flip-face back"><span>FACT</span><h3>{m.fact}</h3><small>← bấm để trở lại</small></div></motion.div></button></Reveal>)}</div></section>
-  <PageFooterNav
-     nextPath="/tradeoff"
-     nextLabel="Đến trang kế"
-   />
+ <PageFooterNav
+  nextPath="/tradeoff"
+  nextLabel="Đến trang kế"
+/>
  </>
 }

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import PageIntro from '../components/PageIntro'
 import Reveal from '../components/Reveal'
 import Balance2D from '../components/Balance2D'
-import { tradeoffs } from '../data'
 import PageFooterNav from '../components/PageFooterNav'
+import { tradeoffs } from '../data'
 import '../page-styles/detail.css'
 export default function TradeOffPage(){
  const [tilt,setTilt]=useState(0)
@@ -76,7 +76,7 @@ return (
         </Reveal>
       </div>
     </section>
-   <PageFooterNav
+    <PageFooterNav
       nextPath="/conclusion"
       nextLabel="Đến trang kế"
     />

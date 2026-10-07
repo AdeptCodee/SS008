@@ -20,8 +20,8 @@ export default function ChaebolPage(){
  </div></section>
  <section className="section section-soft"><div className="container grid grid-2"><Reveal><div><span className="eyebrow">WHY THE PARDON WAS ECONOMIC</span><h2 className="h2" style={{marginTop:15}}>Một người không “cứu” nền kinh tế.</h2><p className="copy" style={{marginTop:20}}>Luận điểm trong tài liệu khác: vai trò của Lee nằm ở vị trí trung tâm quyền kiểm soát Samsung. Việc trở lại hoạt động có thể mở đường cho quyết định đầu tư dài hạn, M&A, đối ngoại và tác động lan tỏa sang chuỗi cung ứng.</p></div></Reveal><Reveal delay={.12}><div className="logic-stack"><div><b>đầu tư vốn</b><ArrowUpRight/></div><div><b>nhà máy / R&D</b><ArrowUpRight/></div><div><b>nhà cung cấp + việc làm</b><ArrowUpRight/></div><div><b>xuất khẩu + năng lực công nghệ</b></div></div></Reveal></div></section>
  <PageFooterNav
-    nextPath="/government"
-    nextLabel="Đến trang kế"
-  />
+  nextPath="/government"
+  nextLabel="Đến trang kế"
+/>
  </>
 }

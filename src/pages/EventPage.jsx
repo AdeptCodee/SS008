@@ -20,8 +20,8 @@ export default function EventPage(){
   </div></section>
   <section className="section section-soft"><div className="container grid grid-2"><Reveal><div><span className="eyebrow">LEE JAE-YONG</span><h2 className="h2" style={{marginTop:16}}>Đặc xá không có nghĩa là được tuyên vô tội.</h2><p className="copy" style={{marginTop:22}}>Theo tài liệu, ông đã mãn hạn tù vào 29/07/2022 nhưng vẫn chịu hạn chế làm việc 5 năm. Quyết định đặc xá dỡ bỏ hạn chế đó và khôi phục quyền điều hành, chứ không xóa phán quyết hình sự.</p></div></Reveal><Reveal delay={.12}><div className="card callout"><ShieldCheck size={28} color="var(--blue)"/><strong>Điểm pháp lý cần nhớ</strong><p>Lệnh đặc xá không đồng nghĩa xóa án hay tuyên vô tội; tài liệu cũng nêu ông vẫn phải đối diện một vụ án riêng về cáo buộc gian lận kế toán, thao túng giá cổ phiếu và giao dịch bất hợp pháp.</p></div></Reveal></div></section>
  <PageFooterNav
-    nextPath="/context"
-    nextLabel="Đến trang kế"
-  />
+  nextPath="/context"
+  nextLabel="Đến trang kế"
+/>
  </>
 }

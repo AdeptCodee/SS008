@@ -199,9 +199,9 @@ export default function Home() {
             href="#map"
             className="scroll-cue scroll-cue-dark"
             onClick={handleStoryScroll}
-            style={{ position: 'fixed', bottom: '10vh'}}
+            style={{ position: 'fixed', bottom: '5vh'}}
           >
-            <ArrowDown size={16} />
+            <ArrowDown size={16}/>
             cuộn để mở câu chuyện
           </a>
         </div>

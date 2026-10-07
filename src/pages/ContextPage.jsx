@@ -15,8 +15,8 @@ export default function ContextPage(){
  <section className="section section-soft"><div className="container grid grid-3"><Reveal><div className="card callout"><TrendingDown size={22} color="var(--blue)"/><b>Tăng trưởng</b><p>Từ 4,1% năm 2021, dự báo 2022 bị hạ xuống quanh 2,6% trong tài liệu.</p></div></Reveal><Reveal delay={.06}><div className="card callout"><Flame size={22} color="#D73645"/><b>Lạm phát & năng lượng</b><p>Chi phí sinh hoạt và sản xuất bị đẩy lên bởi năng lượng nhập khẩu đắt đỏ.</p></div></Reveal><Reveal delay={.12}><div className="card callout"><Ship size={22} color="#0A1333"/><b>Xuất khẩu & chip</b><p>Xuất khẩu là động lực tăng trưởng nhưng nhu cầu chip toàn cầu suy yếu.</p></div></Reveal></div></section>
  <section className="section"><div className="container grid grid-2"><Reveal><div className="editorial-image" style={{minHeight:420}}/></Reveal><Reveal delay={.12}><div style={{alignSelf:'center'}}><span className="eyebrow">THE GOVERNMENT'S NEED</span><h2 className="h2" style={{marginTop:15}}>Họ cần gì từ các Chaebol?</h2><ul className="bullet-list"><li><b>Vốn & quyết định chiến lược</b><span>cho bán dẫn, công nghệ và các dự án rủi ro cao.</span></li><li><b>Xuất khẩu & việc làm</b><span>để làm “đầu tàu” trong bối cảnh thâm hụt thương mại.</span></li><li><b>Năng lực cạnh tranh công nghệ</b><span>để giữ vị trí trong chuỗi cung ứng bán dẫn toàn cầu.</span></li></ul></div></Reveal></div></section>
  <PageFooterNav
-    nextPath="/chaebol"
-    nextLabel="Đến trang kế"
-  />
+  nextPath="/chaebol"
+  nextLabel="Đến trang kế"
+/>
  </>
 }

@@ -1,22 +1,6 @@
-import React, { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, CalendarDays } from 'lucide-react'
-import { timeline } from '../data'
-import { SectionHead } from './shared'
-import './Timeline.css'
-
-export default function Timeline(){
- const [index,setIndex]=useState(0); const item=timeline[index]
- const next=()=>setIndex(i=>Math.min(i+1,timeline.length-1)); const prev=()=>setIndex(i=>Math.max(i-1,0))
- return <section className="section timeline-section" id="timeline"><SectionHead eyebrow="01 / ĐIỀU GÌ ĐÃ XẢY RA?" title="Lật từng hồ sơ để nhìn thấy đường đi của quyết định" copy="Thay vì đọc một timeline dài, người xem tự điều khiển từng mốc và mở chi tiết của nó."/>
-   <div className="timeline-stage">
-    <div className="timeline-topline"><span>{String(index+1).padStart(2,'0')} / {String(timeline.length).padStart(2,'0')}</span><div className="timeline-bar"><motion.i animate={{width:`${((index+1)/timeline.length)*100}%`}}/></div><span>{item.date}</span></div>
-    <div className="timeline-window">
-      <motion.div className="timeline-track" animate={{x:`${-index*(100/timeline.length)}%`}} transition={{type:'spring',stiffness:180,damping:24}}>
-       {timeline.map((x,i)=><div className={`timeline-slide ${i===index?'current':''}`} key={x.date}><div className={`timeline-dot ${x.tone}`}></div><div className="timeline-date"><CalendarDays size={14}/>{x.date}</div><div className="timeline-card"><span className="mini-index">0{i+1}</span><h3>{x.title}</h3><p>{x.detail}</p><span className="open-file">HỒ SƠ {String(i+1).padStart(2,'0')}</span></div></div>)}
-      </motion.div>
-    </div>
-    <div className="timeline-controls"><button onClick={prev} disabled={index===0}><ArrowLeft size={17}/> MỐC TRƯỚC</button><div className="timeline-dots">{timeline.map((x,i)=><button key={x.date} className={i===index?'active':''} onClick={()=>setIndex(i)} aria-label={`Đến ${x.date}`}/>)}</div><button onClick={next} disabled={index===timeline.length-1}>MỐC TIẾP <ArrowRight size={17}/></button></div>
-   </div>
- </section>
-}
+import React,{useState,useRef} from 'react';
+import {motion,useMotionValue,useSpring} from 'framer-motion';
+import {ArrowLeft,ArrowRight} from 'lucide-react';
+import {timeline} from '../data';
+import './Timeline.css';
+export default function Timeline(){const [i,setI]=useState(0);const x=useMotionValue(0);const spring=useSpring(x,{stiffness:230,damping:28});const prev=()=>setI(v=>Math.max(0,v-1));const next=()=>setI(v=>Math.min(timeline.length-1,v+1));return <section className="section timeline-sec" id="story"><div className="section-head"><div><div className="eyebrow">01 / THE EVENT</div><h2>ĐIỀU GÌ<br/><span>XẢY RA?</span></h2></div><p className="section-copy">Không kể lại bằng một danh sách dài. Mỗi lần bấm là một bước tiến trong hồ sơ vụ việc.</p></div><div className="timeline-stage"><div className="timeline-rail"><motion.div className="timeline-fill" animate={{width:`${(i/(timeline.length-1))*100}%`}}/><div className="timeline-points">{timeline.map((t,n)=><button key={t.year} className={n===i?'active':''} onClick={()=>setI(n)} aria-label={t.year}><span>{n+1}</span></button>)}</div></div><div className="timeline-card-wrap"><motion.div key={i} initial={{opacity:0,x:60,rotate:2}} animate={{opacity:1,x:0,rotate:0}} transition={{duration:.6,ease:[.16,1,.3,1]}} className="timeline-card"><div className="timeline-year">{timeline[i].year}</div><div><div className="micro">MỐC {String(i+1).padStart(2,'0')}</div><h3>{timeline[i].title}</h3><p>{timeline[i].body}</p></div><div className="timeline-nav"><button onClick={prev} disabled={i===0}><ArrowLeft size={18}/></button><span>{String(i+1).padStart(2,'0')} / {String(timeline.length).padStart(2,'0')}</span><button onClick={next} disabled={i===timeline.length-1}><ArrowRight size={18}/></button></div></motion.div><motion.div className="timeline-ghost" style={{x:spring}} drag="x" dragConstraints={{left:-120,right:120}} onDragEnd={()=>{const v=x.get(); if(v<-40)next(); if(v>40)prev(); x.set(0)}}><span>DRAG / SWIPE</span></motion.div></div></div></section>}

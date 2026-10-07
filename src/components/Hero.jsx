@@ -1,31 +1,5 @@
-import React, { useState } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { ArrowDown, ArrowUpRight, Cpu, Landmark, Sparkles, Users } from 'lucide-react'
-import { StatChip } from './shared'
-import './Hero.css'
-
-export default function Hero({ onExplore, onTrade }) {
-  const x=useMotionValue(0), y=useMotionValue(0); const sx=useSpring(x,{stiffness:180,damping:18}), sy=useSpring(y,{stiffness:180,damping:18});
-  const [active,setActive]=useState('CHOICE')
-  const move=e=>{const r=e.currentTarget.getBoundingClientRect();const dx=(e.clientX-(r.left+r.width/2))/r.width; const dy=(e.clientY-(r.top+r.height/2))/r.height; x.set(-dy*10); y.set(dx*12)}
-  return <section className="hero section" id="hero">
-    <div className="hero-copy">
-      <div className="hero-kicker"><Sparkles size={15}/> POLICY CASE / SOUTH KOREA / AUG 2022</div>
-      <h1>Giữa lằn ranh<br/><span>Pháp Quyền</span> × <span>Sinh Tồn Kinh Tế</span></h1>
-      <p className="hero-question">Vào tháng 8/2022, vì sao Chính phủ Hàn Quốc lại đặc xá cho nhiều phạm nhân, đặc biệt là các nhà tài phiệt như “Thái tử” Samsung Lee Jae-yong?</p>
-      <p className="hero-answer">Đằng sau quyết định là bài toán về <b>khủng hoảng kinh tế, Chaebol, bán dẫn, đầu tư</b> và cái giá của pháp quyền.</p>
-      <div className="hero-actions"><button className="primary-btn" onClick={onExplore}>MỞ HỒ SƠ PHÂN TÍCH <ArrowDown size={17}/></button><button className="ghost-btn" onClick={onTrade}>XEM TRADE-OFF <ArrowUpRight size={17}/></button></div>
-      <div className="stats-row"><StatChip icon={Users} value="1.693" text="người trong đợt đặc xá"/><StatChip icon={Landmark} value="12/08" text="công bố quyết định"/><StatChip icon={Cpu} value="450T KRW" text="gói đầu tư Samsung được nêu"/></div>
-    </div>
-    <div className="hero-orbit-wrap" onMouseMove={move} onMouseLeave={()=>{x.set(0);y.set(0)}}>
-      <motion.div className="orbit-scene" style={{rotateX:sx,rotateY:sy}}>
-        <div className="orbit orbit-a"/><div className="orbit orbit-b"/><div className="orbit orbit-c"/>
-        <motion.div className="core-sphere" animate={{rotate:active==='CHOICE'?0:360}} transition={{duration:1.2,ease:'easeInOut'}}><div className="sphere-grid"/><div className="sphere-light"/><div className="sphere-label">{active}</div></motion.div>
-        <button className={`orbit-tag tag-top ${active==='ECONOMY'?'selected':''}`} onClick={()=>setActive('ECONOMY')}>ECONOMY <strong>↑</strong></button>
-        <button className={`orbit-tag tag-right ${active==='LAW'?'selected':''}`} onClick={()=>setActive('LAW')}>LAW <strong>↔</strong></button>
-        <button className={`orbit-tag tag-left ${active==='CHAEBOL'?'selected':''}`} onClick={()=>setActive('CHAEBOL')}>CHAEBOL <strong>◎</strong></button>
-      </motion.div>
-      <div className="hero-orbit-caption"><span>INTERACTIVE CORE</span><strong>Chạm vào 3 nút quanh khối 3D</strong><small>Đây là ba lực chính định hình case study.</small></div>
-    </div>
-  </section>
-}
+import React,{useRef} from 'react';
+import {ArrowDown,ArrowRight} from 'lucide-react';
+import {motion,useScroll,useTransform} from 'framer-motion';
+import './Hero.css';
+export default function Hero(){const ref=useRef(null);const {scrollYProgress}=useScroll({target:ref,offset:['start start','end start']});const y=useTransform(scrollYProgress,[0,1],[0,-180]);const rotate=useTransform(scrollYProgress,[0,1],[0,-10]);return <section ref={ref} className="hero grid-bg" id="top"><div className="hero-orbit orbit-a"/><div className="hero-orbit orbit-b"/><motion.div className="hero-card hero-card-left" style={{y,rotate}}><span>LAW</span><b>PHÁP QUYỀN</b></motion.div><motion.div className="hero-card hero-card-right" style={{y}}><span>ECONOMY</span><b>SINH TỒN KINH TẾ</b></motion.div><div className="hero-inner"><div className="hero-kicker">SOUTH KOREA · 12 AUG 2022 · CASE FILE</div><motion.h1 initial={{y:80,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:1,ease:[.16,1,.3,1],delay:.3}}>GIỮA LẰN RANH<br/><em>PHÁP QUYỀN</em><br/>VÀ <span>SINH TỒN</span></motion.h1><motion.p initial={{y:25,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:.8,delay:.75}}>Điều gì khiến Chính phủ Hàn Quốc đặc xá các nhà tài phiệt — và tại sao Lee Jae-yong trở thành tâm điểm?</motion.p><div className="hero-actions"><a href="#story" className="pill primary">BẮT ĐẦU CÂU CHUYỆN <ArrowRight size={16}/></a><a href="#tradeoff" className="pill ghost">XEM ĐÁNH ĐỔI</a></div></div><div className="hero-bottom"><span>SCROLL TO EXPLORE</span><motion.div animate={{y:[0,8,0]}} transition={{repeat:Infinity,duration:1.5}}><ArrowDown size={18}/></motion.div></div></section>}

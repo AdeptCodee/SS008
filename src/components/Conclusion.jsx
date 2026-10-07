@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { reasons } from '../data'
-import { SectionHead } from './shared'
-import './Conclusion.css'
-
-export default function Conclusion(){const [idx,setIdx]=useState(0);const item=reasons[idx];const Icon=item.icon;return <section className="section conclusion-section" id="conclusion"><div className="conclusion-hero"><div className="conclusion-glow"/><span className="eyebrow">08 / VẬY TẠI SAO?</span><h2>Không phải “Samsung hay pháp luật”.<br/><span>Mà là: nền kinh tế hay cái giá của đặc quyền?</span></h2><p>Quyết định đặc xá tháng 8/2022 có thể được lý giải bằng một chuỗi logic: <b>khó khăn kinh tế → vai trò lớn của Chaebol → nhu cầu đầu tư, công nghệ và việc làm → tạo điều kiện cho các lãnh đạo doanh nghiệp lớn trở lại → chấp nhận một cuộc tranh luận về pháp quyền.</b></p></div><div className="reason-carousel"><div className="reason-index"><span>FACTOR</span><strong>{item.n}</strong></div><motion.div className="reason-card-large" key={item.n} initial={{opacity:0,rotateY:-80,x:20}} animate={{opacity:1,rotateY:0,x:0}} transition={{duration:.45}}><div className="reason-top"><Icon size={20}/><span>YẾU TỐ {item.n}</span></div><h3>{item.title}</h3><p>{item.body}</p></motion.div><div className="reason-nav"><button onClick={()=>setIdx(i=>Math.max(0,i-1))} disabled={idx===0}><ChevronLeft/></button><div>{reasons.map((x,i)=><button key={x.n} className={i===idx?'active':''} onClick={()=>setIdx(i)}>{x.n}</button>)}</div><button onClick={()=>setIdx(i=>Math.min(reasons.length-1,i+1))} disabled={idx===reasons.length-1}><ChevronRight/></button></div></div><div className="final-answer"><div className="final-line"/><span>CORE ANSWER</span><h3>Chính phủ Hàn Quốc đặc xá vì muốn dùng “quyền lực kinh tế” của các Chaebol như một đòn bẩy phục hồi — đặc biệt trong đầu tư, bán dẫn, việc làm và xuất khẩu — dù biết quyết định đó sẽ kéo theo tranh luận về bình đẳng trước pháp luật và đặc quyền của giới tài phiệt.</h3><div className="final-line"/></div></section>}
+import React,{useState} from 'react';
+import {motion,AnimatePresence} from 'framer-motion';
+import {ArrowRight,ArrowLeft} from 'lucide-react';
+import './Conclusion.css';
+const factors=[
+ ['01','BỐI CẢNH KINH TẾ','Lạm phát, bất ổn toàn cầu, suy giảm thương mại và áp lực tăng trưởng tạo ra nhu cầu phục hồi.'],
+ ['02','VAI TRÒ CHAEBOL','Các tập đoàn lớn có khả năng huy động vốn, đầu tư, công nghệ, việc làm và xuất khẩu.'],
+ ['03','MỤC TIÊU CHÍNH PHỦ','Khôi phục tăng trưởng, thúc đẩy đầu tư, tạo việc làm và duy trì năng lực cạnh tranh công nghệ.'],
+ ['04','LEE JAE-YONG','Lãnh đạo Samsung là mắt xích đặc biệt trong câu chuyện bán dẫn và quyền ra quyết định chiến lược.'],
+ ['05','SỰ ĐÁNH ĐỔI','Kỳ vọng kinh tế đi cùng tranh luận về bình đẳng trước pháp luật và niềm tin vào tư pháp.']
+];
+export default function Conclusion(){const [i,setI]=useState(0);return <section className="conclusion"><div className="conclusion-top"><div className="eyebrow">09 / THE ANSWER</div><div className="conclusion-counter">0{i+1} — 05</div></div><div className="conclusion-body"><AnimatePresence mode="wait"><motion.div key={i} initial={{opacity:0,x:100}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-100}} transition={{duration:.55,ease:[.16,1,.3,1]}}><div className="factor-num">{factors[i][0]}</div><h2>{factors[i][1]}</h2><p>{factors[i][2]}</p></motion.div></AnimatePresence></div><div className="conclusion-controls"><button onClick={()=>setI(v=>Math.max(0,v-1))}><ArrowLeft size={18}/></button><div className="conclusion-dots">{factors.map((_,n)=><button key={n} onClick={()=>setI(n)} className={n===i?'active':''}/>)}</div><button onClick={()=>setI(v=>Math.min(factors.length-1,v+1))}><ArrowRight size={18}/></button></div><div className="conclusion-line"><div style={{width:`${((i+1)/factors.length)*100}%`}}/></div><div className="answer-stamp">KHÓ KHĂN KINH TẾ + CHAEBOL + NHU CẦU ĐẦU TƯ → ĐẶC XÁ → KỲ VỌNG PHỤC HỒI ↔ TRANH LUẬN PHÁP QUYỀN</div></section>}

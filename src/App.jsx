@@ -1,75 +1,46 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Gamepad2 } from 'lucide-react'
-import { navSections } from './data'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Timeline from './components/Timeline'
-import Crisis from './components/Crisis'
-import Chaebol from './components/Chaebol'
-import Government from './components/Government'
-import Debate from './components/Debate'
-import MythFact from './components/MythFact'
-import TradeOff from './components/TradeOff'
-import Conclusion from './components/Conclusion'
-import GameCTA from './components/GameCTA'
-import './app.css'
+import ScrollProgress from './components/ScrollProgress'
+import Home from './pages/Home'
+import EventPage from './pages/EventPage'
+import ContextPage from './pages/ContextPage'
+import ChaebolPage from './pages/ChaebolPage'
+import GovernmentPage from './pages/GovernmentPage'
+import DebatePage from './pages/DebatePage'
+import MythPage from './pages/MythPage'
+import TradeOffPage from './pages/TradeOffPage'
+import ConclusionPage from './pages/ConclusionPage'
+import SourcesPage from './pages/SourcesPage'
+import FlipbookPage from './pages/FlipbookPage'
+import GamePage from './pages/GamePage'
 
-function App() {
-  const { scrollYProgress } = useScroll()
-  const progress = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-  const [active, setActive] = useState('hero')
-  const ids = useMemo(() => navSections, [])
-
-  useEffect(() => {
-    const observers = ids.map((id) => {
-      const el = document.getElementById(id)
-      if (!el) return null
-      const io = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) setActive(id)
-      }, { rootMargin: '-42% 0px -45% 0px', threshold: 0 })
-      io.observe(el)
-      return io
-    })
-    return () => observers.forEach((io) => io?.disconnect())
-  }, [ids])
-
-  const jump = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-
+function Shell() {
+  const location = useLocation()
   return (
-    <div className="app">
-      <motion.div className="scroll-progress" style={{ width: progress }} />
-      <Header active={active} onJump={jump} />
-      <div className="chapter-rail" aria-label="Tiến độ chương">
-        {ids.map((id, i) => (
-          <button key={id} className={active === id ? 'chapter-dot active' : 'chapter-dot'} onClick={() => jump(id)} title={`${i + 1}. ${id}`}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-          </button>
-        ))}
-      </div>
-
-      <main>
-        <Hero onExplore={() => jump('timeline')} onTrade={() => jump('tradeoff')} />
-        <Timeline />
-        <Crisis />
-        <Chaebol />
-        <Government />
-        <Debate />
-        <MythFact />
-        <TradeOff />
-        <Conclusion />
-        <GameCTA />
-      </main>
-
-      <footer className="footer">
-        <div className="footer-brand"><strong>REPUBLIC OF KOREA / 2022</strong><span>Interactive explainer · React + Vite</span></div>
-        <div className="footer-links">
-          <a href="/game.html"><Gamepad2 size={15} /> MỞ TRANG GAME</a>
-          <span>Ảnh minh họa: Wikimedia Commons</span>
-        </div>
-      </footer>
-    </div>
+    <>
+      <ScrollProgress />
+      <Header />
+      <AnimatePresence mode="wait">
+        <motion.main key={location.pathname} className="page-shell" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .35 }}>
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/event" element={<EventPage />} />
+            <Route path="/context" element={<ContextPage />} />
+            <Route path="/chaebol" element={<ChaebolPage />} />
+            <Route path="/government" element={<GovernmentPage />} />
+            <Route path="/debate" element={<DebatePage />} />
+            <Route path="/myth" element={<MythPage />} />
+            <Route path="/tradeoff" element={<TradeOffPage />} />
+            <Route path="/conclusion" element={<ConclusionPage />} />
+            <Route path="/sources" element={<SourcesPage />} />
+            <Route path="/flipbook" element={<FlipbookPage />} />
+            <Route path="/game/*" element={<GamePage />} />
+          </Routes>
+        </motion.main>
+      </AnimatePresence>
+    </>
   )
 }
 
-export default App
+export default function App(){ return <Shell /> }

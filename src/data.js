@@ -1,72 +1,78 @@
-import { BarChart3, BadgeCheck, Building2, Cpu, Globe2, Handshake, Landmark, Layers3, LineChart, Scale, ShieldCheck, TrendingDown, Users, Zap, Gavel, BriefcaseBusiness, CircleAlert } from 'lucide-react'
-
-export const IMG_YOON = 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Yoon_Suk-yeol_in_May_2022.jpg'
-export const IMG_PYEONGTAEK = 'https://upload.wikimedia.org/wikipedia/commons/c/c0/President_Biden_visited_the_Samsung_Electronics_Pyeongtaek_Campus_%282%29.jpg'
-
-export const timeline = [
-  { date: '2015', title: 'Khởi nguồn vụ sáp nhập', detail: 'Vụ sáp nhập Samsung C&T – Cheil Industries trở thành nguồn cơn của các cáo buộc liên quan đến Lee Jae-yong.', tone: 'red' },
-  { date: '08/2017', title: 'Bị bắt & kết án', detail: 'Tòa sơ thẩm tuyên mức án 5 năm; quá trình xét xử sau đó tiếp tục thay đổi mức hình phạt.', tone: 'red' },
-  { date: '08/2021', title: 'Được tạm tha', detail: 'Lee Jae-yong được tha trước thời hạn sau 18 tháng chấp hành án trong đại án hối lộ.', tone: 'amber' },
-  { date: '29/07/2022', title: 'Án tù hết hạn', detail: 'Phần án tù kết thúc nhưng lệnh cấm làm việc trong 5 năm vẫn là nút thắt pháp lý.', tone: 'blue' },
-  { date: '12/08/2022', title: 'Công bố đặc xá', detail: 'Chính phủ Yoon Suk-yeol công bố đợt đặc xá với thông điệp gắn với phục hồi sinh kế và vượt qua khủng hoảng kinh tế.', tone: 'blue' },
-  { date: '15/08/2022', title: 'Đặc xá có hiệu lực', detail: 'Lee Jae-yong và một số lãnh đạo Chaebol khác được khôi phục quyền kinh doanh.', tone: 'green' },
-  { date: '10/2022', title: 'Trở lại ghế Chủ tịch', detail: 'Lee Jae-yong chính thức giữ vai trò Executive Chairman tại Samsung Electronics.', tone: 'green' },
+export const sections = [
+  { id: 'event', number: '01', title: 'Điều gì đã xảy ra?', subtitle: 'Đặc xá tháng 8/2022 và Lee Jae-yong', path: '/event' },
+  { id: 'context', number: '02', title: 'Tại sao lúc đó?', subtitle: 'Bối cảnh kinh tế Hàn Quốc năm 2022', path: '/context' },
+  { id: 'chaebol', number: '03', title: 'Tại sao Samsung quan trọng?', subtitle: 'Chaebol, bán dẫn và quyền lực kinh tế', path: '/chaebol' },
+  { id: 'government', number: '04', title: 'Chính phủ nói gì?', subtitle: 'Lập luận chính thức và cơ chế kỳ vọng', path: '/government' },
+  { id: 'debate', number: '05', title: 'Tại sao gây tranh cãi?', subtitle: 'Phục hồi kinh tế ↔ pháp quyền', path: '/debate' },
+  { id: 'myth', number: '06', title: 'Điều gì dễ bị hiểu sai?', subtitle: 'Myth vs Fact', path: '/myth' },
+  { id: 'tradeoff', number: '07', title: 'Chính phủ đang đánh đổi điều gì?', subtitle: 'Bài toán cân bằng', path: '/tradeoff' },
+  { id: 'conclusion', number: '08', title: 'Vậy tại sao?', subtitle: '5 yếu tố để trả lời câu hỏi lớn', path: '/conclusion' },
 ]
 
-export const crisisCards = [
-  { icon: TrendingDown, value: '4,1% → 2,6%', label: 'Tăng trưởng GDP', note: '2021 → 2022', accent: 'red', detail: 'Tài liệu dùng sự giảm tốc tăng trưởng để mô tả áp lực suy giảm và nguy cơ đình trệ.' },
-  { icon: BarChart3, value: '6,3%', label: 'Lạm phát', note: 'Tháng 7/2022', accent: 'amber', detail: 'Mức lạm phát cao làm chi phí sinh hoạt và chi phí sản xuất tăng, tạo sức ép lên chính sách tiền tệ.' },
-  { icon: Zap, value: '+23,1%', label: 'Giá năng lượng', note: 'Mức tăng được nêu trong tài liệu', accent: 'orange', detail: 'Chi phí năng lượng leo thang được mô tả như một đòn giáng trực tiếp vào doanh nghiệp trong nước.' },
-  { icon: LineChart, value: '8 tháng', label: 'Thâm hụt liên tiếp', note: 'Xuất khẩu chịu sức ép', accent: 'blue', detail: 'Suy giảm nhu cầu công nghệ toàn cầu kéo theo sức ép lên động lực xuất khẩu của Hàn Quốc.' },
-  { icon: Layers3, value: 'GIÁN ĐOẠN', label: 'Chuỗi cung ứng', note: 'Chi phí đầu vào tăng', accent: 'purple', detail: 'Nguồn cung vật tư đầu vào bị gián đoạn, đẩy giá thành sản phẩm lên cao.' },
-  { icon: Users, value: '21 tháng', label: 'Việc làm tăng', note: 'Điểm sáng hiếm hoi', accent: 'green', detail: 'Thị trường lao động vẫn duy trì tăng trưởng việc làm, là một điểm sáng trong bức tranh chung.' },
+export const sources = [
+  { name: 'Bộ Tư pháp Hàn Quốc', title: '2022년 광복절 특별사면 실시 — 12/08/2022', url: 'https://www.moj.go.kr/moj/221/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGbW9qJTJGMTgyJTJGNTYyMTA4JTJGYXJ0Y2xWaWV3LmRvJTNGcGFzc3dvcmQlM0QlMjZyZ3NCZ25kZVN0ciUzRCUyNmJic0NsU2VxJTNEJTI2cmdzRW5kZGVTdHIlM0QlMjZpc1ZpZXdNaW5lJTNEZmFsc2UlMjZwYWdlJTNEMSUyNmJic09wZW5XcmRfJTNEJUVDJTgyJUFDJUVCJUE5JUI0JTI2' },
+  { name: 'Yonhap News Agency', title: 'Samsung heir Lee granted special presidential pardon', url: 'https://en.yna.co.kr/view/AEN20220812001253315' },
+  { name: 'Yonhap News Agency', title: "Samsung's Lee expected to solidify leadership after pardon", url: 'https://en.yna.co.kr/view/AEN20220812006000320' },
+  { name: 'Reuters', title: "South Korea pardons Samsung's Lee over 'economic crisis'", url: 'https://www.youtube.com/watch?v=R59cneCcUt8' },
+  { name: 'CNA', title: 'Samsung heir Lee receives presidential pardon', url: 'https://www.youtube.com/watch?v=Nddt5eRsFt4' },
+  { name: 'Tuổi Trẻ Online', title: "'Thái tử' Samsung Lee Jae-yong được tổng thống Hàn Quốc ân xá", url: 'https://tuoitre.vn/' },
+  { name: 'Hà Nội Mới', title: 'Vì sao “Thái tử” Samsung được Tổng thống Hàn Quốc ân xá?', url: 'https://hanoimoi.vn/' },
+  { name: 'VietnamBiz', title: 'Hàn Quốc ân xá cho Thái tử Samsung', url: 'https://vietnambiz.vn/' },
+  { name: 'Tiền Phong', title: "'Thái tử Samsung', Chủ tịch Lotte Group được Tổng thống Hàn Quốc ân xá", url: 'https://tienphong.vn/' },
+  { name: 'VPDF', title: 'Tại sao Hàn Quốc ân xá cho các lãnh đạo tham nhũng?', url: 'https://vpdf.org.vn/' },
+  { name: 'ZDNET', title: 'Samsung to spend $355 billion over five years on chips and next-gen technology', url: 'https://www.zdnet.com/' },
+  { name: 'ECGI', title: 'The (Geo)Politics of Controlling Shareholders', url: 'https://ecgi.global/' },
+]
+
+export const eventTimeline = [
+  { date: '2015', title: 'Vụ sáp nhập Samsung', text: 'Thương vụ sáp nhập gây tranh cãi trở thành nguồn gốc của các cáo buộc liên quan đến Lee Jae-yong.' },
+  { date: '08/2017', title: 'Bị bắt / kết án', text: 'Lee Jae-yong bị kết án trong vụ hối lộ liên quan cựu Tổng thống Park Geun-hye.' },
+  { date: '08/2021', title: 'Được tạm tha', text: 'Ông được parole sau 18 tháng chấp hành án 2,5 năm.' },
+  { date: '29/07/2022', title: 'Án tù mãn hạn', text: 'Thời hạn tù kết thúc, nhưng hạn chế làm việc 5 năm vẫn còn.' },
+  { date: '12/08/2022', title: 'Công bố đặc xá', text: 'Tổng thống Yoon Suk-yeol công bố đợt đặc xá cùng các nhà lãnh đạo kinh tế khác.' },
+  { date: '15/08/2022', title: 'Đặc xá có hiệu lực', text: 'Lệnh đặc xá có hiệu lực nhân Ngày Giải phóng Hàn Quốc.' },
+  { date: '10/2022', title: 'Trở lại vị trí lãnh đạo', text: 'Lee Jae-yong được khôi phục đầy đủ quyền điều hành và sau đó trở thành Executive Chairman.' },
+]
+
+export const crisisStats = [
+  { value: '2,6%', label: 'Dự báo tăng trưởng 2022', detail: 'Từ mức 4,1% năm 2021, dự báo tăng trưởng bị hạ xuống quanh 2,6% trong bối cảnh toàn cầu xấu đi.' },
+  { value: '6,3%', label: 'Lạm phát tháng 7/2022', detail: 'Mức tăng cao nhất trong gần 24 năm theo tài liệu; lạm phát vượt mục tiêu 2% kéo dài.' },
+  { value: '23,1%', label: 'Giá năng lượng, 11/2022', detail: 'Giá điện, nước và khí đốt tăng mạnh, gây áp lực lên sản xuất và đời sống.' },
+  { value: '8 tháng', label: 'Thâm hụt thương mại liên tiếp', detail: 'Xuất khẩu suy yếu khi nhu cầu chip toàn cầu lao dốc, kéo theo thâm hụt thương mại kéo dài.' },
+  { value: '3,25%', label: 'Lãi suất cơ bản BOK', detail: 'BOK tăng lãi suất để chống lạm phát và bám đuổi chu kỳ thắt chặt của Fed.' },
+  { value: '21 tháng', label: 'Việc làm tăng liên tiếp', detail: 'Thị trường lao động là một điểm sáng hiếm hoi giữa bức tranh kinh tế nhiều sức ép.' },
 ]
 
 export const chaebols = [
-  { name: 'SAMSUNG', core: 'Bán dẫn · điện tử · sinh dược', copy: 'Hạt nhân công nghệ và xuất khẩu', icon: Cpu, fact: 'Trong tài liệu, Samsung được đặt ở giao điểm của bán dẫn, xuất khẩu, công nghệ và “an ninh kinh tế”.' },
-  { name: 'HYUNDAI', core: 'Ô tô · thép · logistics', copy: 'Trụ cột công nghiệp chế tạo', icon: Building2, fact: 'Hyundai xuất hiện như một trụ cột của công nghiệp chế tạo và mạng lưới doanh nghiệp phụ trợ.' },
-  { name: 'SK', core: 'Bán dẫn · viễn thông · năng lượng', copy: 'Mắt xích công nghệ & hạ tầng', icon: Globe2, fact: 'SK được nêu như một Chaebol chủ chốt trong bán dẫn, viễn thông và năng lượng.' },
-  { name: 'LG', core: 'Điện tử · màn hình · pin EV', copy: 'Đầu tàu pin và hàng điện tử', icon: Zap, fact: 'LG minh họa cho việc Chaebol mở rộng từ điện tử sang pin xe điện và các ngành công nghệ mới.' },
+  { id: 'samsung', name: 'Samsung', tag: 'Bán dẫn', text: 'Hạt nhân công nghệ và xuất khẩu; tài liệu nhấn mạnh vai trò của Samsung trong bán dẫn, vốn hóa và năng lực công nghệ.', stat: '450.000 tỷ won', statLabel: 'gói đầu tư 5 năm được tài liệu nêu' },
+  { id: 'hyundai', name: 'Hyundai', tag: 'Ô tô', text: 'Trụ cột cơ khí – ô tô, tạo mạng lưới doanh nghiệp phụ trợ lớn và đóng góp vào năng lực sản xuất.', stat: 'Top 3', statLabel: 'nhà sản xuất ô tô theo tài liệu' },
+  { id: 'sk', name: 'SK', tag: 'Bán dẫn / HBM', text: 'Một Chaebol quan trọng trong chip nhớ, viễn thông và năng lượng; đại diện cho chiều sâu công nghệ của hệ sinh thái.', stat: 'HBM', statLabel: 'chip nhớ AI chiến lược' },
+  { id: 'lg', name: 'LG', tag: 'Pin / điện tử', text: 'Tham gia điện tử, màn hình, pin EV và hóa chất; cho thấy Chaebol không chỉ xoay quanh Samsung.', stat: 'EV', statLabel: 'pin xe điện và công nghệ năng lượng mới' },
 ]
 
-export const mechanisms = [
-  { title: 'Hợp pháp hóa quyền lực', body: 'Gỡ lệnh cấm làm việc 5 năm → khôi phục quyền tham gia điều hành Samsung.', icon: Gavel, tag: 'QUYỀN' },
-  { title: 'Giải phóng quyết định đầu tư', body: 'Tạo điều kiện để các lãnh đạo doanh nghiệp tham gia đầy đủ các quyết định dài hạn và dự án vốn lớn.', icon: BriefcaseBusiness, tag: 'ĐẦU TƯ' },
-  { title: 'Kéo theo kinh tế vĩ mô', body: 'Đầu tư → đơn hàng cho nhà cung cấp → việc làm → xuất khẩu → kỳ vọng phục hồi tăng trưởng.', icon: TrendingDown, tag: 'LAN TỎA' },
-  { title: 'Bảo vệ vị thế công nghệ', body: 'Lãnh đạo Chaebol là một tác nhân trong ngoại giao kinh tế và cạnh tranh chuỗi cung ứng bán dẫn.', icon: ShieldCheck, tag: 'CÔNG NGHỆ' },
-]
-
-export const supportPoints = [
-  'Lãnh đạo tập trung có thể đẩy nhanh quyết định đầu tư.',
-  'Bán dẫn cần vốn lớn và quyết định dài hạn.',
-  'Samsung là một đầu tàu trong chuỗi giá trị xuất khẩu.',
-  'Tái hoạt động doanh nghiệp được kỳ vọng tạo hiệu ứng lan tỏa.',
-]
-
-export const opposePoints = [
-  'Người có quyền lực kinh tế vẫn phải chịu trách nhiệm như công dân khác.',
-  'Đặc xá có thể củng cố cảm nhận về đặc quyền Chaebol.',
-  'Tiền lệ “lợi ích kinh tế” có thể làm suy yếu tính răn đe.',
-  'Kỳ vọng tăng trưởng không đồng nghĩa với bằng chứng nhân quả.',
+export const policySteps = [
+  { no: '01', title: 'Khôi phục quyền điều hành', body: 'Dỡ hạn chế làm việc 5 năm để Lee Jae-yong có thể chính thức tham gia điều hành Samsung.' },
+  { no: '02', title: 'Giải phóng quyết định đầu tư', body: 'Chính phủ kỳ vọng các nhà lãnh đạo doanh nghiệp lớn có thể thúc đẩy những quyết định vốn và công nghệ quy mô lớn.' },
+  { no: '03', title: 'Hiệu ứng lan tỏa', body: 'Đầu tư lớn được kỳ vọng kéo theo nhà cung cấp, việc làm, sản xuất và doanh thu xuất khẩu.' },
+  { no: '04', title: 'Ngoại giao kinh tế', body: 'Lãnh đạo Chaebol có thể trực tiếp tham gia các cuộc gặp quốc tế liên quan chuỗi cung ứng, công nghệ và hợp tác.' },
 ]
 
 export const myths = [
-  ['“Đặc xá = vô tội”', 'Sai', 'Đặc xá không đồng nghĩa với hủy bản án hay tuyên vô tội.'],
-  ['“Chỉ Samsung được đặc xá”', 'Sai', 'Đợt 2022 áp dụng cho gần 1.700 người, bao gồm các lãnh đạo doanh nghiệp khác.'],
-  ['“Samsung sẽ cứu cả nền kinh tế”', 'Không chính xác', 'Thông điệp chính thức là kỳ vọng đầu tư, công nghệ và việc làm hỗ trợ phục hồi.'],
-  ['“Tất cả Chaebol đều được đối xử giống nhau”', 'Không hoàn toàn', 'Tình trạng pháp lý và tiêu chí xem xét của từng cá nhân/đợt đặc xá khác nhau.'],
-  ['“Đặc xá chắc chắn tạo tăng trưởng”', 'Chưa thể khẳng định', 'Kỳ vọng chính sách không phải bằng chứng nhân quả rằng đặc xá tự nó tạo tăng trưởng.'],
+  { myth: 'Được đặc xá = được tuyên vô tội', fact: 'Sai. Đặc xá không thay đổi phán quyết của tòa và không đồng nghĩa xóa mọi hậu quả pháp lý.', tone: 'blue' },
+  { myth: 'Chính phủ chỉ đặc xá riêng Samsung', fact: 'Sai. Đợt đặc xá có quy mô gần 1.700 người và bao gồm nhiều nhóm khác nhau.', tone: 'blue' },
+  { myth: 'Samsung sẽ cứu nền kinh tế', fact: 'Quá đơn giản hóa. Chính phủ nói về kỳ vọng đóng góp của các lãnh đạo doanh nghiệp lớn thông qua đầu tư, công nghệ và việc làm.', tone: 'blue' },
+  { myth: 'Đặc xá chắc chắn tạo tăng trưởng', fact: 'Chưa thể khẳng định. Kỳ vọng chính sách không phải bằng chứng về quan hệ nhân quả trực tiếp.', tone: 'red' },
 ]
 
-export const tradeoffLeft = ['Đầu tư', 'Việc làm', 'Xuất khẩu', 'Công nghệ', 'Cạnh tranh quốc tế']
-export const tradeoffRight = ['Công bằng pháp luật', 'Niềm tin tư pháp', 'Tiền lệ Chaebol', 'Tập trung quyền lực', 'Đặc quyền']
-
-export const reasons = [
-  { n: '01', title: 'Khủng hoảng kinh tế', body: 'Lạm phát, bất ổn toàn cầu, thương mại suy yếu và áp lực tăng trưởng buộc Seoul phải tìm một cú hích nhanh.', icon: TrendingDown },
-  { n: '02', title: 'Chaebol quá lớn để bỏ qua', body: 'Samsung, Hyundai, SK, LG có khả năng huy động vốn, đầu tư công nghệ, tạo việc làm và thúc đẩy xuất khẩu.', icon: Building2 },
-  { n: '03', title: 'Chính phủ cần động lực tư nhân', body: 'Mục tiêu là khôi phục tăng trưởng, đẩy đầu tư, giữ năng lực công nghệ và hỗ trợ sinh kế.', icon: Handshake },
-  { n: '04', title: 'Lee Jae-yong là nút quyết định', body: 'Đặc xá gỡ lệnh cấm làm việc, đưa quyền ra quyết định chiến lược trở lại gần trung tâm quyền lực của Samsung.', icon: BadgeCheck },
-  { n: '05', title: 'Và cái giá là một cuộc tranh luận', body: 'Lợi ích kinh tế kỳ vọng được đặt cạnh bình đẳng trước pháp luật, niềm tin tư pháp và đặc quyền của Chaebol.', icon: Scale },
+export const tradeoffs = [
+  { side: 'Kỳ vọng kinh tế', color: 'blue', points: ['Đầu tư', 'Việc làm', 'Xuất khẩu', 'Công nghệ', 'Cạnh tranh quốc tế'] },
+  { side: 'Rủi ro thể chế', color: 'red', points: ['Bình đẳng trước pháp luật', 'Niềm tin tư pháp', 'Tiền lệ cho Chaebol', 'Tập trung quyền lực', 'Tranh luận đặc quyền'] },
 ]
 
-export const navSections = ['hero', 'timeline', 'crisis', 'chaebol', 'government', 'debate', 'myth', 'tradeoff', 'conclusion']
+export const conclusion = [
+  ['01', 'Bối cảnh kinh tế', 'Lạm phát, bất ổn toàn cầu, suy giảm thương mại và áp lực tăng trưởng.'],
+  ['02', 'Vai trò của Chaebol', 'Samsung, Lotte, Hyundai, SK có khả năng huy động vốn, đầu tư, công nghệ, việc làm và xuất khẩu.'],
+  ['03', 'Mục tiêu Chính phủ', 'Phục hồi tăng trưởng, thúc đẩy đầu tư, tạo việc làm và duy trì cạnh tranh công nghệ.'],
+  ['04', 'Trường hợp Lee Jae-yong', 'Nhân vật lãnh đạo Samsung được nhìn như một mắt xích quan trọng để khôi phục quyền điều hành.'],
+  ['05', 'Đánh đổi', 'Kỳ vọng kinh tế phải đi cùng tranh luận về pháp quyền, bình đẳng và niềm tin xã hội.'],
+]

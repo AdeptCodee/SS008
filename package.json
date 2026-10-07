@@ -1,5 +1,5 @@
 {
-  "name": "korea-pardon-economic-tradeoff",
+  "name": "korea-pardon-policy-story",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,13 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "framer-motion": "^12.23.24",
+    "@react-three/fiber": "^9.3.0",
+    "framer-motion": "^12.23.0",
+    "@react-three/drei": "^10.7.6",
     "lucide-react": "^0.468.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.0",
+    "three": "^0.179.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
-    "vite": "^7.1.7"
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^7.0.6"
   }
 }

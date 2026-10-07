@@ -9,7 +9,7 @@ export default function Header(){
   const isHome=pathname==='/'
   return <header className="site-header">
     <div className="nav-wrap">
-      <Link to="/" className="brand">SS008<span>/</span><small>KOREA 2022</small></Link>
+      <Link to="/" className="brand">CHAEBOL<span>/</span><small>KOREA 2022</small></Link>
       <nav className={open?'nav-open':''}>
         <Link className={isHome?'active':''} to="/">Tổng quan</Link>
         <Link className={pathname==='/event'?'active':''} to="/event">Sự kiện</Link>

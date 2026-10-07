@@ -21,3 +21,13 @@ npm run dev
 ```bash
 npm run build
 ```
+
+
+## Latest interaction update
+
+- The homepage hero is now a full-viewport photographic scene pinned during scroll.
+- The first content panel slides upward over the hero, physically covering the image.
+- Reversing the scroll moves the panel back down so the hero photo is progressively revealed again.
+- Hero scale, tint and copy shift are scroll-driven.
+- Route changes reset the viewport to the top via a pathname-aware scroll-to-top effect.
+- The hero image is from Wikimedia Commons and is licensed CC BY-SA 4.0; see IMAGE-CREDITS.md.

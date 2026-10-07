@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header'
 import ScrollProgress from './components/ScrollProgress'
@@ -17,6 +18,11 @@ import GamePage from './pages/GamePage'
 
 function Shell() {
   const location = useLocation()
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }))
+    return () => cancelAnimationFrame(frame)
+  }, [location.pathname])
   return (
     <>
       <ScrollProgress />

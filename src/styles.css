@@ -418,7 +418,7 @@ iframe{
       rgba(20,40,160,.14),
       rgba(10,19,51,.35)
     ),
-    url('https://upload.wikimedia.org/wikipedia/commons/2/2e/Seoul_Night_Skyline_2022.jpg');
+    url('./assets/bigChaebol.jpg');
   background-size:cover;
   background-position:center;
   box-shadow:0 35px 90px rgba(10,19,51,.22);

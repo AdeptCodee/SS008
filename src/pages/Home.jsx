@@ -150,11 +150,11 @@ export default function Home() {
                 <br />
                 <span style={{  }}>tác động đến</span>
                 <br />
-                <span style={{ color:'#0c6ec9'}}>CHÍNH TRỊ</span>
+                <span style={{ color:'#0c6ec9', lineHeight: 1.2 }}>CHÍNH TRỊ</span>
               </h1>
 
               <p className="lead hero-lead">
-                Tại sao Chính phủ Hàn Quốc đặc xá Lee
+                Tại sao Chính phủ Hàn Quốc đặc xá cho Lee
                 Jae-yong và nhiều lãnh đạo Chaebol vào
                 tháng 8/2022?
               </p>

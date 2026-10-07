@@ -415,8 +415,8 @@ iframe{
   background-image:
     linear-gradient(
       135deg,
-      rgba(20,40,160,.14),
-      rgba(10,19,51,.35)
+      rgba(244, 247, 246, 0.14),
+      rgba(53, 46, 34, 0.35)
     ),
     url('./assets/bigChaebol.jpg');
   background-size:cover;
@@ -427,7 +427,7 @@ iframe{
 }
 
 .editorial-image::after{
-  content:'SEOUL / 2022';
+  content:'CHAEBOL / Big 5';
   position:absolute;
   left:24px;
   bottom:22px;

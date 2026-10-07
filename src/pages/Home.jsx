@@ -148,7 +148,7 @@ export default function Home() {
               <h1 className="h1 hero-title" style={{ marginTop: 12 }}>
                 Khi <span style={{ color:'#35cc27'}}>KINH TẾ</span>
                 <br />
-                <span style={{  }}>tác động đến</span>
+                <span>tác động đến</span>
                 <br />
                 <span style={{ color:'#0c6ec9', lineHeight: 1.2 }}>CHÍNH TRỊ</span>
               </h1>

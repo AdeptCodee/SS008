@@ -145,12 +145,12 @@ export default function Home() {
                 CASE STUDY / SOUTH KOREA / 2022
               </span>
 
-              <h1 className="h1 hero-title">
-                Giữa lằn ranh
+              <h1 className="h1 hero-title" style={{ marginTop: 12 }}>
+                Khi <span style={{ color:'#35cc27'}}>KINH TẾ</span>
                 <br />
-                <span>pháp quyền</span>
+                <span style={{  }}>tác động đến</span>
                 <br />
-                và sinh tồn kinh tế.
+                <span style={{ color:'#0c6ec9'}}>CHÍNH TRỊ</span>
               </h1>
 
               <p className="lead hero-lead">
@@ -199,6 +199,7 @@ export default function Home() {
             href="#map"
             className="scroll-cue scroll-cue-dark"
             onClick={handleStoryScroll}
+            style={{ position: 'fixed', bottom: '10vh'}}
           >
             <ArrowDown size={16} />
             cuộn để mở câu chuyện

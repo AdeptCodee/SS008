@@ -17,8 +17,27 @@
   background:var(--paper);
   font-synthesis:none;
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+/* --- BẮT ĐẦU ĐOẠN CODE CỦA LENIS (Thay cho html{scroll-behavior:smooth}) --- */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+/* --- KẾT THÚC ĐOẠN CODE CỦA LENIS --- */
+
 body{margin:0;background:var(--paper);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button{font:inherit}

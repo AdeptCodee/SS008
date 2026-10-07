@@ -1,0 +1,7 @@
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import { crisisCards } from '../data'
+import { SectionHead } from './shared'
+import './Crisis.css'
+
+export default function Crisis(){const [active,setActive]=useState(0);const item=crisisCards[active];const Icon=item.icon;return <section className="section crisis-section" id="crisis"><div className="crisis-copy"><SectionHead eyebrow="02 / BỨC TRANH KINH TẾ" title="Bấm vào từng chỉ số để mở lớp thông tin" copy="Người xem không cần đọc mọi con số cùng lúc. Hãy chọn một áp lực kinh tế để xem nó tác động vào lập luận của Chính phủ như thế nào."/><div className="metric-grid">{crisisCards.map(({icon:MetricIcon,value,label,note},i)=><button key={label} onClick={()=>setActive(i)} className={`metric-card ${crisisCards[i].accent} ${active===i?'selected':''}`}><MetricIcon size={20}/><strong>{value}</strong><span>{label}</span><small>{note}</small></button>)}</div></div><motion.div className="crisis-detail" key={active} initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.35}}><div className="crisis-detail-icon"><Icon size={28}/></div><span className="eyebrow">FOCUS / {String(active+1).padStart(2,'0')}</span><h3>{item.label}</h3><div className="detail-big">{item.value}</div><p>{item.detail}</p><div className="detail-note">{item.note}</div><div className="detail-rings"><i/><i/><i/></div></motion.div></section>}

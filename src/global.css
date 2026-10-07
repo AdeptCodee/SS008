@@ -1,0 +1,3 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--bg:#f4f8ff;--surface:#fff;--ink:#10203a;--muted:#60738f;--line:#d9e4f3;--blue:#1428a0;--blue2:#3154d7;--cyan:#00a9ff;--navy:#0c1736}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 12% 0%,rgba(49,84,215,.12),transparent 28rem),radial-gradient(circle at 92% 18%,rgba(0,169,255,.08),transparent 25rem),var(--bg);font-family:'Space Grotesk',system-ui,sans-serif;color:var(--ink)}button,a{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid rgba(20,40,160,.25);outline-offset:3px}img{display:block;max-width:100%}

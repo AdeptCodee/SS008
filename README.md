@@ -1,25 +1,25 @@
-# Korea Pardon — Interactive React Case Study
+# Korea Pardon Interactive — Samsung Blue / Interactive Edition
 
-Microsite React + Vite về quyết định đặc xá tháng 8/2022 tại Hàn Quốc.
+React + Vite microsite for the South Korea August 2022 pardon case study.
 
-## Visual direction
-
-- Giao diện sáng, editorial / policy dashboard.
-- Samsung blue `#1428A0` làm màu chủ đạo, kết hợp navy, cyan và đỏ như màu cảnh báo/tranh luận.
-- 3D CSS ở hero và phần trade-off, animation bằng Framer Motion.
-- Nội dung được chuyển từ Markdown thành narrative sections.
-- Không hiển thị tài liệu tham khảo hoặc câu hỏi kết thúc từng phần.
-- Có 2 video YouTube ở các điểm chính.
+## Highlights
+- Modular React components: each major section has its own `.jsx` and `.css`.
+- Interactive hero: 3D core with selectable Economy / Law / Chaebol nodes.
+- Timeline slider with manual step controls.
+- Crisis metrics open a detail panel when clicked.
+- Chaebol selector.
+- Government mechanism stepper with buttons and keyboard arrows.
+- Debate flip/side switch.
+- Myth vs Fact card switching.
+- Interactive Trade-off inspector and 3D balance.
+- Conclusion factor carousel.
+- Dedicated `/game.html` placeholder linked from header, final CTA and footer.
 
 ## Run
-
 ```bash
 npm install
 npm run dev
-```
-
-## Build
-
-```bash
 npm run build
 ```
+
+The content follows the provided Markdown source, while the reference list and end-of-section questions are intentionally omitted from the website.

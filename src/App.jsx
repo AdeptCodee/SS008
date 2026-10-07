@@ -1,7 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Lenis from '@studio-freight/lenis' // 1. Import Lenis
+import Lenis from '@studio-freight/lenis'
+
 import Header from './components/Header'
 import ScrollProgress from './components/ScrollProgress'
 import Home from './pages/Home'
@@ -19,30 +20,60 @@ import GamePage from './pages/GamePage'
 
 function Shell() {
   const location = useLocation()
+  const lenisRef = useRef(null)
 
-  // 2. Khởi tạo Lenis hiệu ứng cuộn mượt quán tính
+  // Khởi tạo Lenis một lần duy nhất
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,     // Thời gian trượt (tăng lên để trượt nhẹ và êm hơn)
-      smoothWheel: true, // Kích hoạt mượt mà khi lăn chuột
+      duration: 1.2,
+      smoothWheel: true,
     })
+
+    lenisRef.current = lenis
+
+    let rafId
 
     function raf(time) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      rafId = requestAnimationFrame(raf)
     }
 
-    const rafId = requestAnimationFrame(raf)
+    rafId = requestAnimationFrame(raf)
 
     return () => {
       cancelAnimationFrame(rafId)
-      lenis.destroy() // Hủy lenis khi unmount để tránh rò rỉ bộ nhớ
+      lenis.destroy()
+      lenisRef.current = null
     }
   }, [])
 
-  // Xử lý cuộn lên đầu trang khi chuyển Route
+  // Mỗi khi chuyển sang route mới -> về đầu trang
   useEffect(() => {
-    const frame = requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }))
+    const resetScroll = () => {
+      // Reset Lenis trước
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, {
+          immediate: true,
+          force: true,
+        })
+      }
+
+      // Reset native browser scroll
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto',
+      })
+    }
+
+    // Chạy ngay
+    resetScroll()
+
+    // Chạy thêm 1 frame để tránh animation route ghi đè vị trí
+    const frame = requestAnimationFrame(() => {
+      resetScroll()
+    })
+
     return () => cancelAnimationFrame(frame)
   }, [location.pathname])
 
@@ -50,8 +81,16 @@ function Shell() {
     <>
       <ScrollProgress />
       <Header />
+
       <AnimatePresence mode="wait">
-        <motion.main key={location.pathname} className="page-shell" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .35 }}>
+        <motion.main
+          key={location.pathname}
+          className="page-shell"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+        >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/event" element={<EventPage />} />
@@ -72,4 +111,6 @@ function Shell() {
   )
 }
 
-export default function App(){ return <Shell /> }
+export default function App() {
+  return <Shell />
+}

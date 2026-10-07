@@ -5,6 +5,7 @@ import Lenis from '@studio-freight/lenis'
 
 import Header from './components/Header'
 import ScrollProgress from './components/ScrollProgress'
+
 import Home from './pages/Home'
 import EventPage from './pages/EventPage'
 import ContextPage from './pages/ContextPage'
@@ -22,7 +23,9 @@ function Shell() {
   const location = useLocation()
   const lenisRef = useRef(null)
 
-  // Khởi tạo Lenis một lần duy nhất
+  // =========================================================
+  // KHỞI TẠO LENIS
+  // =========================================================
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -30,6 +33,9 @@ function Shell() {
     })
 
     lenisRef.current = lenis
+
+    // Cho các component khác có thể truy cập Lenis
+    window.__lenis = lenis
 
     let rafId
 
@@ -42,23 +48,119 @@ function Shell() {
 
     return () => {
       cancelAnimationFrame(rafId)
+
       lenis.destroy()
+
+      if (window.__lenis === lenis) {
+        delete window.__lenis
+      }
+
       lenisRef.current = null
     }
   }, [])
 
-  // Mỗi khi chuyển sang route mới -> về đầu trang
+  // =========================================================
+  // XỬ LÝ ANCHOR SCROLL MƯỢT
+  // Ví dụ: <a href="#map">
+  // =========================================================
   useEffect(() => {
-    const resetScroll = () => {
-      // Reset Lenis trước
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, {
-          immediate: true,
-          force: true,
+    const handleAnchorClick = (event) => {
+      const anchor = event.target.closest('a[href^="#"]')
+
+      if (!anchor) return
+
+      // Chỉ xử lý click chuột trái bình thường
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return
+      }
+
+      const href = anchor.getAttribute('href')
+
+      if (!href || href === '#') {
+        return
+      }
+
+      let target = null
+
+      try {
+        target = document.querySelector(href)
+      } catch {
+        return
+      }
+
+      if (!target) {
+        return
+      }
+
+      event.preventDefault()
+
+      const lenis = lenisRef.current
+
+      if (lenis) {
+        lenis.scrollTo(target, {
+          duration: 1.15,
+          immediate: false,
+        })
+      } else {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
         })
       }
 
-      // Reset native browser scroll
+      // Cập nhật hash nhưng không để browser tự jump
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${window.location.search}${href}`
+      )
+    }
+
+    document.addEventListener('click', handleAnchorClick)
+
+    return () => {
+      document.removeEventListener('click', handleAnchorClick)
+    }
+  }, [])
+
+  // =========================================================
+  // RESET SCROLL KHI CHUYỂN ROUTE
+  // =========================================================
+  useEffect(() => {
+    // Không cho browser tự restore vị trí cũ
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    const resetScroll = () => {
+      const lenis = lenisRef.current
+
+      if (lenis) {
+        // Dừng animation scroll hiện tại nếu có
+        if (typeof lenis.stop === 'function') {
+          lenis.stop()
+        }
+
+        // Reset vị trí Lenis về đầu
+        lenis.scrollTo(0, {
+          immediate: true,
+          force: true,
+        })
+
+        // Chạy Lenis lại
+        if (typeof lenis.start === 'function') {
+          lenis.start()
+        }
+      }
+
+      // Đồng bộ native browser scroll
       window.scrollTo({
         top: 0,
         left: 0,
@@ -66,20 +168,32 @@ function Shell() {
       })
     }
 
-    // Chạy ngay
+    // Reset ngay
     resetScroll()
 
-    // Chạy thêm 1 frame để tránh animation route ghi đè vị trí
-    const frame = requestAnimationFrame(() => {
+    // Reset lại sau 1 frame
+    const frame1 = requestAnimationFrame(() => {
       resetScroll()
     })
 
-    return () => cancelAnimationFrame(frame)
+    // Reset thêm một lần để tránh AnimatePresence/
+    // browser đưa vị trí cũ trở lại
+    const frame2 = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        resetScroll()
+      })
+    })
+
+    return () => {
+      cancelAnimationFrame(frame1)
+      cancelAnimationFrame(frame2)
+    }
   }, [location.pathname])
 
   return (
     <>
       <ScrollProgress />
+
       <Header />
 
       <AnimatePresence mode="wait">
@@ -93,6 +207,7 @@ function Shell() {
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
+
             <Route path="/event" element={<EventPage />} />
             <Route path="/context" element={<ContextPage />} />
             <Route path="/chaebol" element={<ChaebolPage />} />

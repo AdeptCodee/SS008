@@ -15,7 +15,7 @@ export default function ContextPage() {
     <>
       <PageIntro 
         number="02 / CONTEXT" 
-        title="Tại sao lúc đó?" 
+        title="Tại sao lại là lúc đó?" 
         subtitle="Năm 2022, Hàn Quốc phải xử lý cùng lúc lạm phát, chi phí năng lượng, tỷ giá, chuỗi cung ứng và nguy cơ giảm tốc. Đây là đòn đánh cực kỳ nặng nề vào nền kinh tế Hàn Quốc" 
       />
 

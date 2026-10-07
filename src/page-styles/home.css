@@ -72,11 +72,11 @@
   color: #AFC0FF;
 }
 
-.hero-lead {
+.lead.hero-lead {
   max-width: 720px;
   margin-top: 28px;
-  color: #F0F4FF;
-  text-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  color: #f0f4ffc0;
+  text-shadow: 0 8px 25px rgb(49 99 239 / 76%);
 }
 
 .hero-actions {

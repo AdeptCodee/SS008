@@ -1,7 +1,21 @@
 // Vị trí: src/game/Stage4Report.jsx
 import { useState } from 'react';
+import { formatInvestigationTime } from './leaderboard'
 
-export default function Stage4Report({ onRestart }) {
+export default function Stage4Report({
+  playerName,
+  durationMs,
+  scoreStatus,
+  scoreError,
+  leaderboard,
+  leaderboardStatus,
+  leaderboardError,
+  savedScoreId,
+  onComplete,
+  onRetrySave,
+  onRefreshLeaderboard,
+  onRestart,
+}) {
   const [ans1, setAns1] = useState('');
   const [ans2, setAns2] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -52,7 +66,10 @@ export default function Stage4Report({ onRestart }) {
           <button
             className="game-btn"
             disabled={!isCorrect}
-            onClick={() => setSubmitted(true)}
+              onClick={() => {
+                setSubmitted(true)
+                onComplete()
+              }}
           >
             [ XUẤT BẢN BÁO CÁO & ĐÓNG HỒ SƠ ]
           </button>
@@ -60,10 +77,14 @@ export default function Stage4Report({ onRestart }) {
       ) : (
         /* MÀN HÌNH KẾT THÚC: CASE CLOSED */
         <div style={{ textAlign: 'center' }}>
-          <div className="stamp-secret" style={{ borderColor: '#22c55e', color: '#22c55e' }}>
+          <div className="stamp-secret">
             CASE CLOSED // INVESTIGATION COMPLETE
           </div>
           <h2>WHAT REALLY HAPPENED? — 15 AUGUST 2022</h2>
+          <p className="completion-player">
+            Phóng viên: <strong>{playerName}</strong>
+            {durationMs !== null && <> · Thời gian: <strong>{formatInvestigationTime(durationMs)}</strong></>}
+          </p>
           
           <div className="profile-card" style={{ borderLeftColor: '#38bdf8', maxWidth: '700px', margin: '20px auto' }}>
             <p>
@@ -95,6 +116,68 @@ export default function Stage4Report({ onRestart }) {
           </div>
 
           <h2 style={{ color: '#4ade80' }}>CASE COMPLETION: 100%</h2>
+
+          <section className="leaderboard-panel" aria-labelledby="leaderboard-title">
+            <div className="leaderboard-heading">
+              <div>
+                <span className="leaderboard-eyebrow">HỒ SƠ ĐÃ ĐÓNG</span>
+                <h3 id="leaderboard-title">BẢNG XẾP HẠNG ĐIỀU TRA</h3>
+                <p>Xếp theo thời gian mới nhất của từng tên phóng viên; tên trùng sẽ được cập nhật kết quả.</p>
+              </div>
+              {leaderboardStatus === 'loaded' && (
+                <button className="leaderboard-refresh" type="button" onClick={onRefreshLeaderboard}>
+                  Làm mới
+                </button>
+              )}
+            </div>
+
+            {scoreStatus === 'saving' && <p className="leaderboard-status" role="status">Đang lưu kết quả lên bảng xếp hạng…</p>}
+            {scoreStatus === 'saved' && <p className="leaderboard-status success" role="status">Đã lưu hoặc cập nhật kết quả của bạn. Bảng xếp hạng đã được làm mới.</p>}
+            {scoreStatus === 'unconfigured' && (
+              <p className="leaderboard-status error" role="alert">
+                Kết quả chưa được lưu trực tuyến vì dự án chưa cấu hình Supabase. Thêm URL và anon key vào file .env, sau đó chạy script supabase/schema.sql.
+              </p>
+            )}
+            {scoreStatus === 'error' && (
+              <div className="leaderboard-status error" role="alert">
+                <p>{scoreError}</p>
+                <button className="leaderboard-retry" type="button" onClick={onRetrySave}>Thử lưu lại</button>
+              </div>
+            )}
+
+            {leaderboardStatus === 'loading' && <p className="leaderboard-status" role="status">Đang tải bảng xếp hạng…</p>}
+            {leaderboardStatus === 'unconfigured' && (
+              <p className="leaderboard-status">Bảng xếp hạng dùng chung sẽ hiển thị sau khi cấu hình Supabase.</p>
+            )}
+            {leaderboardStatus === 'error' && (
+              <div className="leaderboard-status error" role="alert">
+                <p>{leaderboardError}</p>
+                <button className="leaderboard-retry" type="button" onClick={onRefreshLeaderboard}>Thử tải lại</button>
+              </div>
+            )}
+            {leaderboardStatus === 'loaded' && (
+              leaderboard.length > 0 ? (
+                <div className="leaderboard-table-wrap">
+                  <table className="leaderboard-table">
+                    <thead>
+                      <tr><th>HẠNG</th><th>PHÓNG VIÊN</th><th>THỜI GIAN</th></tr>
+                    </thead>
+                    <tbody>
+                      {leaderboard.map((score, index) => (
+                        <tr key={score.id} className={score.id === savedScoreId ? 'current-player' : ''}>
+                          <td>{String(index + 1).padStart(2, '0')}</td>
+                          <td>{score.player_name}{score.id === savedScoreId ? ' · BẠN' : ''}</td>
+                          <td>{formatInvestigationTime(score.duration_ms)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="leaderboard-status">Chưa có kết quả nào. Hãy là người đầu tiên hoàn thành hồ sơ.</p>
+              )
+            )}
+          </section>
 
           <button className="game-btn" onClick={onRestart}>
             CHƠI LẠI TỪ ĐẦU (REPLAY CASE)

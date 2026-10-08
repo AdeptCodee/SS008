@@ -32,7 +32,7 @@ export default function GamePlayPage() {
           </span>
         </div>
 
-        <div className="stage-scroll-area" data-lenis-prevent>
+        <div key={currentStage} className="stage-scroll-area" data-lenis-prevent>
           {currentStage === 1 && (
             <Stage1CaseFile
               initialStep={caseStarted ? 2 : 1}

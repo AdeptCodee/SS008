@@ -99,7 +99,7 @@ export default function Stage3Connect({ onNext }) {
             <strong>JUSTICE CONCERN:</strong> Giới phê bình đặt câu hỏi liệu tầm quan trọng kinh tế có nên dùng để biện minh cho sự đối xử đặc biệt đối với một lãnh đạo Chaebol đã bị kết án hay không.
           </p>
           <button className="game-btn" onClick={onNext}>
-            VIẾT BÁO CÁO KẾT LUẬN (YOUR REPORT) →
+            VIẾT BÁO CÁO KẾT LUẬN →→
           </button>
         </div>
       )}

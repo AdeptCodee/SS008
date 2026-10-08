@@ -25,6 +25,11 @@ function Shell() {
   const lenisRef = useRef(null)
   const isStandaloneGame = location.pathname.replace(/\/$/, '') === '/game/play'
 
+  useEffect(() => {
+    document.documentElement.classList.toggle('game-mode', isStandaloneGame)
+    return () => document.documentElement.classList.remove('game-mode')
+  }, [isStandaloneGame])
+
   // =========================================================
   // KHỞI TẠO LENIS
   // =========================================================

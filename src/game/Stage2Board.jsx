@@ -4,36 +4,49 @@ import { EVIDENCES, QUESTIONS } from './gameData';
 
 export default function Stage2Board({ onNext }) {
   const [selectedEv, setSelectedEv] = useState(null);
+  const [activeDropQuestion, setActiveDropQuestion] = useState(null);
   const [answers, setAnswers] = useState({ q1: [], q2: [], q3: [] });
   const [feedback, setFeedback] = useState(
-    'Bấm chọn 1 thẻ bằng chứng, sau đó bấm "+ Gắn vào câu hỏi" tương ứng.'
+    'Kéo thẻ bằng chứng vào câu hỏi phù hợp, hoặc chạm một thẻ rồi chạm câu hỏi.'
   );
 
-  const handleAssign = (question) => {
-    if (!selectedEv) {
-      setFeedback('⚠️ Bạn chưa chọn thẻ bằng chứng nào!');
-      return;
-    }
-
-    if (selectedEv.isRedHerring) {
-      setFeedback(`❌ BẰNG CHỨNG GÂY NHIỄU: "${selectedEv.title}" là sự thật, nhưng không giải thích trực tiếp lý do đặc xá!`);
+  const handleAssign = (evidence, question) => {
+    if (evidence.isRedHerring) {
+      setFeedback(`❌ BẰNG CHỨNG GÂY NHIỄU: "${evidence.title}" là sự thật, nhưng không giải thích trực tiếp lý do đặc xá!`);
       setSelectedEv(null);
       return;
     }
 
     const currentList = answers[question.id];
-    if (currentList.some(item => item.id === selectedEv.id)) {
+    if (currentList.some(item => item.id === evidence.id)) {
       setFeedback('⚠️ Bằng chứng này đã có trong câu hỏi này rồi.');
       return;
     }
 
-    if (question.requiredTags.includes(selectedEv.title)) {
-      const updated = [...currentList, selectedEv];
+    if (question.requiredTags.includes(evidence.title)) {
+      const updated = [...currentList, evidence];
       setAnswers({ ...answers, [question.id]: updated });
-      setFeedback(`✅ CHÍNH XÁC! Đã ghép [${selectedEv.title}] vào ${question.number}.`);
+      setFeedback(`✅ CHÍNH XÁC! Đã ghép [${evidence.title}] vào ${question.number}.`);
       setSelectedEv(null);
     } else {
-      setFeedback(`🤔 Thẻ [${selectedEv.title}] trả lời cho một khía cạnh khác, chưa khớp với ${question.number}.`);
+      setFeedback(`🤔 Thẻ [${evidence.title}] trả lời cho một khía cạnh khác, chưa khớp với ${question.number}.`);
+    }
+  };
+
+  const handleDrop = (event, question) => {
+    event.preventDefault();
+    setActiveDropQuestion(null);
+
+    const evidenceId = event.dataTransfer.getData('text/plain');
+    const evidence = EVIDENCES.find(item => item.id === evidenceId);
+    if (evidence) {
+      handleAssign(evidence, question);
+    }
+  };
+
+  const handleTouchFallback = (question) => {
+    if (selectedEv) {
+      handleAssign(selectedEv, question);
     }
   };
 
@@ -55,7 +68,23 @@ export default function Stage2Board({ onNext }) {
               <div
                 key={ev.id}
                 className={`evidence-card ${selectedEv?.id === ev.id ? 'selected' : ''}`}
+                draggable
+                role="button"
+                tabIndex={0}
+                aria-label={`Bằng chứng ${ev.title}. Kéo vào câu hỏi phù hợp.`}
                 onClick={() => setSelectedEv(ev)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setSelectedEv(ev);
+                  }
+                }}
+                onDragStart={(event) => {
+                  event.dataTransfer.setData('text/plain', ev.id);
+                  event.dataTransfer.effectAllowed = 'move';
+                  setSelectedEv(ev);
+                }}
+                onDragEnd={() => setActiveDropQuestion(null)}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span className="ev-tag">[{ev.tag}]</span>
@@ -77,7 +106,21 @@ export default function Stage2Board({ onNext }) {
               const isSolved = currentEvs.length === 3;
 
               return (
-                <div key={q.id} className={`question-box ${isSolved ? 'solved' : ''}`}>
+                <div
+                  key={q.id}
+                  className={`question-box ${isSolved ? 'solved' : ''} ${activeDropQuestion === q.id ? 'drop-target' : ''}`}
+                  onDragOver={(event) => {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = 'move';
+                    setActiveDropQuestion(q.id);
+                  }}
+                  onDragLeave={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setActiveDropQuestion(null);
+                    }
+                  }}
+                  onDrop={(event) => handleDrop(event, q)}
+                >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontWeight: 800, fontSize: '0.9rem', color: isSolved ? '#22c55e' : '#f59e0b' }}>
                       {q.number} {isSolved && '— ĐÃ RÕ!'}
@@ -98,9 +141,23 @@ export default function Stage2Board({ onNext }) {
                   </div>
 
                   {!isSolved && (
-                    <button className="assign-btn" onClick={() => handleAssign(q)}>
-                      + Gắn bằng chứng đang chọn vào đây
-                    </button>
+                    <div
+                      className="question-drop-zone"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Ô thả bằng chứng cho ${q.number}`}
+                      onClick={() => handleTouchFallback(q)}
+                      onKeyDown={(event) => {
+                        if ((event.key === 'Enter' || event.key === ' ') && selectedEv) {
+                          event.preventDefault();
+                          handleTouchFallback(q);
+                        }
+                      }}
+                    >
+                      {selectedEv
+                        ? `Thả hoặc chạm để gắn "${selectedEv.title}" vào đây`
+                        : 'Kéo thẻ bằng chứng vào đây'}
+                    </div>
                   )}
                 </div>
               );

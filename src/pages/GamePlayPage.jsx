@@ -19,20 +19,20 @@ export default function GamePlayPage() {
       <div className="game-container">
         <div className="stage-indicator">
           <span className={`stage-step ${currentStage >= 1 ? 'active' : ''}`}>
-            1. Vụ án (Case File)
+            1. Vụ án
           </span>
           <span className={`stage-step ${currentStage >= 2 ? 'active' : ''}`}>
-            2. Điều tra (Board)
+            2. Điều tra
           </span>
           <span className={`stage-step ${currentStage >= 3 ? 'active' : ''}`}>
-            3. Nối dữ kiện (Connect)
+            3. Nối dữ kiện
           </span>
           <span className={`stage-step ${currentStage >= 4 ? 'active' : ''}`}>
-            4. Kết luận (Report)
+            4. Kết luận   
           </span>
         </div>
 
-        <div className="stage-scroll-area">
+        <div className="stage-scroll-area" data-lenis-prevent>
           {currentStage === 1 && (
             <Stage1CaseFile
               initialStep={caseStarted ? 2 : 1}

@@ -26,7 +26,7 @@ export default function Stage1CaseFile({ onStartCase, onNext, initialStep = 1 })
           <div style={{ background: '#1e293b', padding: '16px', borderRadius: '6px', marginBottom: '20px' }}>
             <strong>NHIỆM VỤ CỦA BẠN:</strong>
             <p style={{ margin: '8px 0 0 0', color: '#38bdf8' }}>
-              Vào vai phóng viên điều tra, hãy tìm hiểu TẠI SAO (FIND OUT WHY).
+              Vào vai phóng viên điều tra, hãy tìm hiểu TẠI SAO.
             </p>
           </div>
           <button className="game-btn" onClick={handleStartClick}>
@@ -41,8 +41,8 @@ export default function Stage1CaseFile({ onStartCase, onNext, initialStep = 1 })
             <p style={{ margin: '6px 0', color: '#cbd5e1' }}><strong>Chức vụ:</strong> Phó Chủ tịch Samsung Electronics ("Thái tử" Samsung)</p>
             <p style={{ margin: '6px 0', color: '#cbd5e1' }}><strong>Tiền án:</strong> Kết án liên quan đến đại án hối lộ</p>
             <p style={{ margin: '6px 0', color: '#cbd5e1' }}><strong>Bản án:</strong> 2 năm 6 tháng tù giam</p>
-            <p style={{ margin: '6px 0', color: '#cbd5e1' }}><strong>Tạm tha (Parole):</strong> Tháng 8/2021 (Vẫn chịu lệnh cấm làm việc 5 năm)</p>
-            <p style={{ margin: '6px 0', color: '#38bdf8' }}><strong>Trạng thái tháng 8/2022:</strong> Có khả năng được Tổng thống đặc xá khôi phục quyền kinh doanh.</p>
+            <p style={{ margin: '6px 0', color: '#cbd5e1' }}><strong>Ngày ra tù:</strong> Tháng 8/2021, được tạm tha với các hạn chế về kinh doanh trong vòng 5 năm</p>
+            <p style={{ margin: '6px 0', color: '#38bdf8' }}><strong>Ân xá tháng 8/2022:</strong> Được Tổng thống đặc xá khôi phục quyền kinh doanh.</p>
           </div>
           <button className="game-btn" onClick={onNext}>
             [ OPEN INVESTIGATION ]

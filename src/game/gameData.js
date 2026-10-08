@@ -106,19 +106,19 @@ export const QUESTIONS = [
   {
     id: 'q1',
     number: 'QUESTION 01',
-    question: 'Tại sao Lee Jae-yong lại được xem là quan trọng về mặt kinh tế? (Why was Lee Jae-yong considered economically important?)',
+    question: 'Tại sao Lee Jae-yong lại được xem là quan trọng về mặt kinh tế?',
     requiredTags: ['SEMICONDUCTOR', 'SAMSUNG INVESTMENT', 'GLOBAL COMPETITION']
   },
   {
     id: 'q2',
     number: 'QUESTION 02',
-    question: 'Chính phủ đã đưa ra lý do chính thức gì cho quyết định đặc xá? (What reason did the government officially give for the pardon?)',
+    question: 'Chính phủ đã đưa ra lý do chính thức gì cho quyết định đặc xá?',
     requiredTags: ['ECONOMIC RECOVERY', 'JOB CREATION', 'TECHNOLOGY INVESTMENT']
   },
   {
     id: 'q3',
     number: 'QUESTION 03',
-    question: 'Tại sao quyết định này lại gây tranh cãi dữ dội? (Why was the decision controversial?)',
+    question: 'Tại sao quyết định này lại gây tranh cãi dữ dội?',
     requiredTags: ['CHAEBOL POWER', 'CRIMINAL CONVICTION', 'SPECIAL TREATMENT']
   }
 ];

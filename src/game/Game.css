@@ -1,0 +1,435 @@
+/* Vị trí: src/game/Game.css */
+
+/* 1. KHUNG TỔNG CỦA GAME Ở TRẠNG THÁI BÌNH THƯỜNG */
+.game-container {
+  max-width: 1100px;
+  height: 75vh;
+  min-height: 550px;
+  max-height: 750px;
+  margin: 0 auto;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.game-standalone-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 16px 24px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.game-standalone-page .game-container {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  flex: 1;
+}
+
+.game-exit-link {
+  align-self: flex-start;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.game-exit-link:hover {
+  color: #f8fafc;
+}
+
+/* 2. THANH TIẾN TRÌNH 4 MÀN & NÚT THOÁT */
+.stage-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.stage-steps-group {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stage-step {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stage-step.active {
+  color: #38bdf8;
+}
+
+/* Đảm bảo vùng chứa màn chơi co giãn hết chiều cao còn lại */
+.stage-scroll-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* 3. VÙNG NỘI DUNG TỰ CUỘN CHO MÀN 1, 3, 4 */
+.case-folder,
+.stage-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* Ngăn việc cuộn kịch đáy làm trôi trang web chính */
+  padding-right: 6px;
+}
+
+.case-folder {
+  border: 2px dashed #475569;
+  background-color: #0f172a;
+  padding: 32px 24px;
+  text-align: center;
+  border-radius: 10px;
+  max-width: 650px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stamp-secret {
+  display: inline-block;
+  border: 2px solid #ef4444;
+  color: #ef4444;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  margin: 0 auto 16px auto;
+}
+
+.profile-card {
+  background: #334155;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  margin: 16px 0;
+  border-left: 5px solid #f59e0b;
+}
+
+.game-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.game-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.game-btn:disabled {
+  background-color: #475569;
+  cursor: not-allowed;
+}
+
+/* 4. MÀN 2: BẢNG ĐIỀU TRA (CHỐNG TRÔI TRANG WEB) */
+.stage2-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* Bắt buộc phải có để thanh cuộn bên trong hoạt động */
+}
+
+.feedback-bar {
+  background: #0f172a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 4px solid #38bdf8;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.board-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  flex: 1;
+  min-height: 0; /* Giữ 2 cột nằm gọn trong khung */
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background-color: #0f172a;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+}
+
+.column-title {
+  margin: 0 0 10px 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* Vùng cuộn độc lập của Cột Bằng Chứng và Cột Câu Hỏi */
+.evidence-grid,
+.questions-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* Chặn cuộn lan ra trang web ngoài */
+  padding-right: 6px;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-content: start;
+}
+
+/* Làm đẹp thanh cuộn bên trong game */
+.evidence-grid::-webkit-scrollbar,
+.questions-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.evidence-grid::-webkit-scrollbar-thumb,
+.questions-scroll::-webkit-scrollbar-thumb {
+  background-color: #475569;
+  border-radius: 4px;
+}
+
+.evidence-card {
+  background-color: #1e293b;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.evidence-card:hover {
+  border-color: #64748b;
+}
+
+.evidence-card.selected {
+  border-color: #38bdf8;
+  background-color: #172554;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+.ev-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #0f172a;
+  color: #38bdf8;
+}
+
+.question-box {
+  background-color: #1e293b;
+  border: 2px solid #475569;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.question-box.solved {
+  border-color: #22c55e;
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+.slot-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.slot-item {
+  background-color: #0f172a;
+  border: 1px solid #22c55e;
+  color: #4ade80;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.assign-btn {
+  background: #334155;
+  color: #38bdf8;
+  border: 1px dashed #38bdf8;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.assign-btn:hover {
+  background: #1e293b;
+}
+
+/* 5. MÀN 3 & MÀN 4 */
+.branches-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.branch-column {
+  background-color: #0f172a;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  text-align: center;
+}
+
+.dot-node {
+  padding: 10px;
+  margin: 6px 0;
+  background-color: #1e293b;
+  border: 2px solid #475569;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.dot-node.connected {
+  border-color: #38bdf8;
+  background-color: #0c4a6e;
+  color: #fff;
+}
+
+.choice-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  border: 2px solid #334155;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.choice-btn.active {
+  border-color: #38bdf8;
+  background-color: #172554;
+}
+
+.score-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.score-card {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+}
+
+/* =========================================================
+   6. TỐI ƯU GIAO DIỆN CHO ĐIỆN THOẠI (RESPONSIVE MOBILE)
+   ========================================================= */
+@media (max-width: 768px) {
+  .game-container {
+    height: 88vh;           /* Tận dụng tối đa chiều dọc màn hình điện thoại */
+    max-height: none;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .stage-indicator {
+    overflow-x: auto;       /* Cho phép vuốt ngang thanh tiêu đề nếu màn hình quá nhỏ */
+    white-space: nowrap;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .stage-step {
+    font-size: 0.75rem;
+  }
+
+  /* Trên điện thoại: Chuyển 2 cột thành xếp tầng Trên - Dưới */
+  .board-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+  }
+
+  /* Biến Kho bằng chứng thành băng chuyền vuốt ngang như thẻ bài */
+  .evidence-grid {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+
+  .evidence-card {
+    min-width: 230px;       /* Chiều rộng cố định mỗi thẻ khi vuốt ngang */
+    max-width: 230px;
+    flex-shrink: 0;
+  }
+
+  /* Màn 3 & 4 thu gọn thành 1 cột trên điện thoại */
+  .branches-grid,
+  .score-board {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .case-folder {
+    padding: 20px 14px;
+  }
+
+  .game-standalone-page {
+    padding: 12px;
+  }
+}
